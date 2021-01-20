@@ -39,8 +39,8 @@ def baseline_Model():
     #  ~model.add(Dense(32, input_dim=32, kernel_initializer='normal', activation='relu'))
     #  ~model.add(Dense(34, input_dim=34, kernel_initializer='normal', activation='relu'))
     model.add(Dense(6, kernel_initializer='normal', activation='relu'))
-    #  ~model.add(Dense(1, kernel_initializer='normal', activation='linear', W_constraint=nonneg()))     #Does not work if input is transformed onto [-1,1]
-    model.add(Dense(1, kernel_initializer='normal'))
+    model.add(Dense(1, kernel_initializer='normal', activation='linear', W_constraint=nonneg()))     #Does not work if input is transformed onto [-1,1]
+    #  ~model.add(Dense(1, kernel_initializer='normal'))
     model.compile(loss='mean_squared_error', optimizer='adam')
     return model
 
@@ -228,10 +228,8 @@ def featureImportance(tree,importVars,cutDict):
 
 if __name__ == "__main__":
     # Load data
-    data = TFile.Open("/net/data_cms1b/user/dmeuser/top_analysis/output/ttbar_res100.0_new.root")
-    #  ~data = TFile.Open("/net/data_cms1b/user/dmeuser/top_analysis/output/ttbar_res1.0_new.root")
-    tree = data.Get("ttbar_res100.0/ttbar_res_dilepton_CP5")
-    #  ~tree = data.Get("ttbar_res1.0/ttbar_res_dilepton_CP5")
+    data = TFile.Open("/net/data_cms1b/user/dmeuser/top_analysis/2016/v21/minTrees/TTbar_diLepton_100.0.root")
+    tree = data.Get("ttbar_res100.0/TTbar_diLepton")
     
     #  ~hist=TH1F("test","",100,0,200)
     #  ~tree.Draw("genMET>>test","(PuppiMET>0 && PuppiMET<40)","goff")
